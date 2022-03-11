@@ -16,8 +16,5 @@ public class Kart {
         System.out.println("Carro" + nome + "ta soltando N0S IHUUUUUUUUUUULLLLLLL");
     }
 
-    void fazerDrift (){
-
-        System.out.println("Carro"+ nome +  "ta fazendo Drift rangangangangangangangangangangangangan");
-    }
+    void fazerDrift(){ System.out.println("Carro"+ nome +  "ta fazendo Drift rangangangangangangangangangangangangan");}
 }

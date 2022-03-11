@@ -16,8 +16,8 @@ public class Main {
       Piloto piloto1 = new Piloto();
       Piloto piloto2 = new Piloto();
 
-      piloto1.nome = "Piloto1";
-      piloto2.nome = "Piloto2";
+      piloto1.nome = " 1 ";
+      piloto2.nome = " 2 ";
 
       kart1.piloto = piloto1;
       kart2.piloto = piloto2;
@@ -32,4 +32,6 @@ public class Main {
 
 
     }
+
+
 }

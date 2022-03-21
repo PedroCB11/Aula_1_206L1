@@ -54,8 +54,8 @@ public class Main {
 
 
         //alocando funcionario na obra
-        System.out.println("funcionarios na obra");
-        e1.alocarFuncionario();
+       System.out.println("funcionarios na obra");
+       e1.alocarFuncionario(1);
     }
 
 }

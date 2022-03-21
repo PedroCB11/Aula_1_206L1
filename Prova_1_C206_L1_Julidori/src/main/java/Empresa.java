@@ -53,16 +53,20 @@ public class Empresa {
     }
 
     public void alocarFuncionario(int index){
-        int obra =0;
+       int obra =0;
         for (Funcionario funcionario: funcionarios) {
             if (funcionario != null) {
-                if (funcionario.matricula. ("Funcionario adicionado a obra")){
-                    obra++;
-                }
-            }
+                if (funcionario.matricula.lenth ("funcionarios na obra")){
+                   obra++;
+               }
+           }
         }
-        
+
 
 
     }
+}
+
+
+
 

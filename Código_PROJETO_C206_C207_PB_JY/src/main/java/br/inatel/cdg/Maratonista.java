@@ -1,14 +1,13 @@
 package br.inatel.cdg;
 
-public class Maratonista {
-    private String nome;
-    private int passos;
+public class Maratonista extends Jogador {
+    private String péDir;
+    private String péEsq;
+    int QuantidadeDePassos[];
 
-    public void PernaDireita(){
-
-    }
-    public void PernaEsquerda(){
+    public void PassosDados(){
 
     }
+
 
 }

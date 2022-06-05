@@ -2,6 +2,9 @@ package br.inatel.cdg;
 
 public class Jogador {
     String nome;
+    int Ranking;
+    int tempogasto;
+
 
     public String getNome() {
         return nome;
@@ -27,8 +30,7 @@ public class Jogador {
         this.tempogasto = tempogasto;
     }
 
-    int Ranking;
-    int tempogasto;
+
 
 
     public void PosNoRanking(){

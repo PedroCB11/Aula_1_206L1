@@ -1,9 +1,9 @@
+import br.inatel.cdg.Entrada;
 import br.inatel.cdg.Jogador;
+import excessoes.Excesaum;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Entrada entrada = new Entrada();
         boolean flag = true;
         String jogarnovamente;
         Jogador jogador;
@@ -20,16 +21,23 @@ public class Main {
         long tempoFinal;
         long tempoGasto;
         List<Integer> rank = new ArrayList<>();
-        int i= 0;
+        int i = 0;
+        int j = 0;
         int NumPassos = 100;
         Jogador jogadores[];
+        int anterior;
+
+        String peDireito = null;
+        String passoanterior;
+        String passoatual;
 
         boolean primeiravez = true;
 
-        while (flag){
+        while (flag) {
 
-            if(primeiravez)
+            if (primeiravez) {
                 System.out.println("BEM VINDO");
+            }
             primeiravez = false;
             System.out.println("SELECIONE A OPÇAO DESEJADA: ");
             System.out.println("1- JOGAR");
@@ -37,12 +45,23 @@ public class Main {
             System.out.println("3- RANKING DOS MELHORES");
             System.out.println("4- SAIR");
             System.out.println("Sua opçao: ");
-            int opçaodesejada = sc.nextInt();
+            //entrada da opção desejada
+            int opçaodesejada =0;
+            do {
+                try {
+                    opçaodesejada = entrada.Menu();
 
-            switch (opçaodesejada){
+                }catch (Excesaum e){
+                    System.out.println(e.getMessage());
+                }
+
+            }while(opçaodesejada != 1 && opçaodesejada != 2 && opçaodesejada != 3 && opçaodesejada != 4);
+
+            switch (opçaodesejada) {
                 case 1:
                     sc.nextLine();
-
+                    int passos = 0;
+                    passoanterior = "x";
                     String n;
                     System.out.println("Digite seu nick: ");
                     n = sc.nextLine();
@@ -57,56 +76,70 @@ public class Main {
                         System.out.println(" 1 ");
                         TimeUnit.SECONDS.sleep(1);
                         System.out.println(" VAI VAI VAI! ");
-
+                        // COMEÇA O JOGO
                         tempoInicial = System.currentTimeMillis();
-                        for (i=0;i<NumPassos;i++){
-                            rank.add(i);
+                        while (passos < 10) {
+                            passoatual = sc.nextLine();
+                            if (!passoatual.equals(passoanterior)) {
+                                passos++;
+                                System.out.println(passos);
+
+                            }
+                            else if(passoatual.equals(passoanterior)){
+                                System.out.println("Ops, quase tropeceu"); //Substituir por "Ops, quase tropeceu" ou "perdeu o pé".
+                                System.out.println("LEMBRE-SE SEMPRE DE USAR O OUTRO PÉ");
+                            }
+                            passoanterior = passoatual;
+
+
 
                         }
+                        TimeUnit.SECONDS.sleep(4);
                         tempoFinal = System.currentTimeMillis();
                         tempoGasto = tempoFinal - tempoInicial;
                         System.out.println("Seu tempo foi: " + tempoGasto);
-                        System.out.println("Sua posiçao no ranking é: "  );
+                        System.out.println("Sua posiçao no ranking é: " + rank);
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                        System.out.println("JOGAR NOVAMENTE? SIM//NAO ");
+                    System.out.println("JOGAR NOVAMENTE? SIM//NAO ");
                     jogarnovamente = sc.nextLine();
-                    for(int j=0;j<0;j++){
-                        if(jogarnovamente == "SIM" || jogarnovamente == "sim"){
-                            opçaodesejada = 1;
-                        }else if(jogarnovamente == "NAO" || jogarnovamente == "nao"){
-                            flag = false;
-                        }else {
-                            throw new IllegalArgumentException("DIGITE SIM OU NAO");
-                        }
+                    if (jogarnovamente.equals("SIM") || jogarnovamente.equals("sim")) {
+                        opçaodesejada = 1;
+                    } else if (jogarnovamente.equals("NAO") || jogarnovamente.equals("nao")) {
+                        flag = false;
+                    } else if(!jogarnovamente.equals("SIM") && !jogarnovamente.equals("NAO") && !jogarnovamente.equals("sim") && !jogarnovamente.equals("nao") ){
+                        System.out.println("DIGITE SIM OU NAO");
+                        jogarnovamente = sc.nextLine();
                     }
-
-
                     break;
-
                 case 2:
-
                     System.out.println("O Jogo se basea em uma simples maratona de 100 metros rasos, para dar o primeiro passo, aperte *D* ou *A*,");
                     System.out.println("D para dar o primeiro passo com o pé direiro e A para dar o primeiro passo com o pé esquerdo, o seu objetivo é completar os 100 metros no menor tempo possivel, ");
                     System.out.println("lembre-se sempre de ir com um pé de cada vez para nao tropeçar.");
                     System.out.println("BOA SORTE!");
-
                     try {
-                        TimeUnit.SECONDS.sleep(5);
+                        TimeUnit.SECONDS.sleep(22);
                         System.out.println(" PREPARADO? SE ESTIVER, DIGITE 1 PARA JOGAR ");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     break;
-
                 case 3:
                     System.out.println("ranking dos melhores vai ser mostrada");
+                    break;
+
+                case 4:
+                    System.out.println("TCHAU TCHAU");
+                    flag = false;
+                    break;
             }
         }
     }
 }
+
+
 
 //        do{
 //

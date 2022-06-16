@@ -1,6 +1,9 @@
+import br.inatel.cdg.Comojogar;
 import br.inatel.cdg.Entrada;
 import br.inatel.cdg.Jogador;
+import br.inatel.cdg.Ranking;
 import excessoes.Excesaum;
+import excessoes.ExcessaoQueisso;
 
 
 import java.util.ArrayList;
@@ -11,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static void main(String[] args) {
+        Ranking r = null; // criar funçao para ler BD
 
         Scanner sc = new Scanner(System.in);
         Entrada entrada = new Entrada();
@@ -20,16 +24,14 @@ public class Main {
         long tempoInicial;
         long tempoFinal;
         long tempoGasto;
-        List<Integer> rank = new ArrayList<>();
         int i = 0;
-        int j = 0;
         int NumPassos = 100;
         Jogador jogadores[];
         int anterior;
 
         String peDireito = null;
         String passoanterior;
-        String passoatual;
+        String passoatual ;
 
         boolean primeiravez = true;
 
@@ -62,9 +64,11 @@ public class Main {
                     sc.nextLine();
                     int passos = 0;
                     passoanterior = "x";
-                    String n;
+
+
+                    Jogador j1 = new Jogador();
                     System.out.println("Digite seu nick: ");
-                    n = sc.nextLine();
+                    j1.setNome(sc.nextLine());
 
                     System.out.println("O jogo vai começar em ");
                     try {
@@ -74,19 +78,24 @@ public class Main {
                         System.out.println(" 2 ");
                         TimeUnit.SECONDS.sleep(1);
                         System.out.println(" 1 ");
+
+                        // TODO CHAMA O IF DO QUEIMOU A LARGADA
                         TimeUnit.SECONDS.sleep(1);
                         System.out.println(" VAI VAI VAI! ");
                         // COMEÇA O JOGO
                         tempoInicial = System.currentTimeMillis();
+                        passoatual = sc.nextLine();
+
+
                         while (passos < 10) {
                             passoatual = sc.nextLine();
                             if (!passoatual.equals(passoanterior)) {
                                 passos++;
-                                System.out.println(passos);
+                                System.out.println("PASSOS DADOS "+ passos);
 
                             }
                             else if(passoatual.equals(passoanterior)){
-                                System.out.println("Ops, quase tropeceu"); //Substituir por "Ops, quase tropeceu" ou "perdeu o pé".
+                                System.out.println("Ops, quase tropecou"); //Substituir por "Ops, quase tropeceu" ou "perdeu o pé".
                                 System.out.println("LEMBRE-SE SEMPRE DE USAR O OUTRO PÉ");
                             }
                             passoanterior = passoatual;
@@ -94,11 +103,15 @@ public class Main {
 
 
                         }
+                        System.out.println("FIM DA CORRIDA! ESTAMOS CALCULANDO SEU TEMPO...");
                         TimeUnit.SECONDS.sleep(4);
                         tempoFinal = System.currentTimeMillis();
                         tempoGasto = tempoFinal - tempoInicial;
-                        System.out.println("Seu tempo foi: " + tempoGasto);
-                        System.out.println("Sua posiçao no ranking é: " + rank);
+                        pos_jogo:
+                        System.out.println("Seu tempo foi: " + tempoGasto + "ms.");
+                        j1.setTempogasto(tempoGasto);
+                        r.addJogador(j1);
+                        System.out.println("Sua posiçao no ranking é: " + r.VerPosicao(j1));// implementaar retorno do rank
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -115,10 +128,7 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.println("O Jogo se basea em uma simples maratona de 100 metros rasos, para dar o primeiro passo, aperte *D* ou *A*,");
-                    System.out.println("D para dar o primeiro passo com o pé direiro e A para dar o primeiro passo com o pé esquerdo, o seu objetivo é completar os 100 metros no menor tempo possivel, ");
-                    System.out.println("lembre-se sempre de ir com um pé de cada vez para nao tropeçar.");
-                    System.out.println("BOA SORTE!");
+                    Comojogar.Comojogartexto();
                     try {
                         TimeUnit.SECONDS.sleep(22);
                         System.out.println(" PREPARADO? SE ESTIVER, DIGITE 1 PARA JOGAR ");

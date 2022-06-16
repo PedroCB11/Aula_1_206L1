@@ -1,40 +1,29 @@
 package br.inatel.cdg;
 
-public class Jogador {
-    String nome;
-    int Ranking;
-    int tempogasto;
+public class Jogador implements Comparable{
+    private static String nick;
+    private static long tempogasto;
 
 
     public String getNome() {
-        return nome;
+        return nick;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nick) {
+        this.nick = nick;
     }
 
-    public int getRanking() {
-        return Ranking;
-    }
-
-    public void setRanking(int ranking) {
-        Ranking = ranking;
-    }
-
-    public int getTempogasto() {
+    public long getTempogasto() {
         return tempogasto;
     }
 
-    public void setTempogasto(int tempogasto) {
+    public void setTempogasto(long tempogasto) {
         this.tempogasto = tempogasto;
     }
 
 
-
-
-    public void PosNoRanking(){
-
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
-
 }
